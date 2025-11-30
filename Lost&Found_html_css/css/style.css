@@ -1,0 +1,733 @@
+/*HOME PAGE CSS CODE*/
+/* Css Variables for colors */
+:root {
+  --primary-color: #4F1BBF;     /* main purple */
+  --primary-hover: #3c10a5;     /* darker purple for hover */
+  --text-dark: #333;            /* general dark text */
+  --text-medium: #444;          /* medium gray text */
+  --text-light: #666;           /* lighter text for descriptions */
+  --bg-light: #f9f9fc;          /* light background */
+  --bg-white: #ffffff;          /* white background */
+  --shadow: rgba(0, 0, 0, 0.1); /* default shadow color */
+  --accent-light: #dcd4ff;      /* hover accent for links */
+}
+
+/* Global Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  height: auto; /* allow content to determine height */
+  min-height: 100vh; /* at least full viewport height */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh; /* ensures footer sticks at bottom if content is short */
+}
+
+footer {
+  margin-top: auto; /* pushes footer to bottom */
+}
+
+
+/* Header */
+header {
+  background-color: var(--primary-color);
+  color: var(--bg-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 0.8rem 5rem;
+  box-shadow: 0 2px 6px var(--shadow);
+  flex-wrap: wrap;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center; 
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.logo {
+  height: 55px;
+  width: 50px;
+  object-fit: contain;
+}
+
+.logo-section h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1; 
+  margin-top: 2px; 
+}
+
+nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8.5rem; 
+  margin: 0;
+}
+
+nav a {
+  color: var(--bg-white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent-light);
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem 6rem;
+  flex-wrap: wrap;
+  background-color: var(--bg-white);
+}
+
+.hero-text {
+  max-width: 55%;
+  min-width: 300px;
+}
+
+.hero-text h2 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  color: var(--text-medium);
+  font-size: 1rem;
+}
+
+.hero-img img {
+  width: 320px;
+  max-width: 100%;
+}
+
+/* Actions Section */
+.actions {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: var(--bg-white);
+}
+
+.actions h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.actions p {
+  color: var(--text-light);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.action-card {
+  background: var(--bg-white);
+  border-radius: 15px;
+  padding: 2rem;
+  width: 280px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.icon {
+  width: 50px;
+  margin-bottom: 1rem;
+}
+
+.action-card h4 {
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.action-card p {
+  color: var(--text-medium);
+  font-size: 0.95rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--bg-white);
+  border-radius: 25px;
+  text-decoration: none;
+  margin-top: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.purple {
+  background-color: var(--primary-color);
+}
+
+.purple:hover {
+  background-color: var(--primary-hover);
+}
+
+/* FAQ Section */
+.faq {
+  padding: 3rem 6rem;
+  background-color: var(--bg-white);
+}
+
+.faq h3 {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.faq-list p {
+  margin-bottom: 1.5rem;
+  color: var(--text-medium);
+  line-height: 1.7;
+}
+
+/* Footer */
+footer {
+  background-color: var(--primary-color);
+  color: var(--bg-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+footer p {
+  margin: 0.3rem 0;
+}
+
+footer a {
+  color: var(--bg-white);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* LOGIN PAGE CSS */
+.login-section {
+  padding: 3rem 6rem;
+  background-color: var(--bg-white);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.login-image {
+  flex: 1;
+  text-align: center;
+}
+
+.login-image img {
+  max-width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.login-form-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.login-form {
+  background-color: var(--bg-white);
+  padding: 2rem;
+  width: 100%;
+}
+
+.login-form h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.login-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--bg-light);
+}
+
+.login-form input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  background-color: var(--bg-white);
+}
+
+.login-form input::placeholder {
+  color: var(--text-light);
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 1rem;
+}
+
+.login-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.login-links {
+  text-align: center;
+}
+
+.create-account-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.forgot-password {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.no-account {
+  color: var(--text-light);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* SIGNUP PAGE CSS */
+.signup-section {
+  padding: 3rem 6rem;
+  background-color: var(--bg-white);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-container {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.signup-image {
+  flex: 1;
+  text-align: center;
+}
+
+.signup-image img {
+  max-width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.signup-form-container {
+  flex: 1;
+  max-width: 400px;
+}
+
+.signup-form {
+  background-color: var(--bg-white);
+  padding: 2rem;
+  width: 100%;
+}
+
+.signup-form h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.signup-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.signup-form input,
+.signup-form select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--bg-light);
+}
+
+.signup-form input:focus,
+.signup-form select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  background-color: var(--bg-white);
+}
+
+.signup-form input::placeholder {
+  color: var(--text-light);
+}
+
+.signup-form select {
+  background-color: var(--bg-light);
+  cursor: pointer;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 1rem;
+}
+
+.signup-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.signup-links {
+  text-align: center;
+}
+
+.clear-account {
+  color: var(--text-light);
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.signin-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.have-account {
+  color: var(--text-light);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* REPORT PAGE CSS*/
+
+.report-section {
+  padding: 1rem 3rem; 
+  background-color: var(--bg-white);
+  min-height: 50vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-container {
+  width: 100%;
+  max-width: 700px;
+}
+
+.report-form {
+  background-color: var(--bg-white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.report-form .form-group {
+  margin-bottom: 1rem; 
+}
+
+.report-form label {
+  display: block;
+  margin-bottom: 0.3rem; 
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.9rem; 
+}
+
+.report-form input,
+.report-form textarea {
+  width: 100%;
+  padding: 8px 10px; 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem; 
+  transition: border-color 0.3s;
+}
+
+.report-form input:focus,
+.report-form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(79, 27, 191, 0.1);
+}
+
+.category-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem; 
+}
+
+.category-row {
+  display: flex;
+  gap: 1rem; 
+}
+
+.category-option {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem; 
+  flex: 1;
+}
+
+.category-option input {
+  width: auto;
+  margin: 0;
+}
+
+.category-option label {
+  margin: 0;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+.file-upload {
+  margin-top: 0.3rem; 
+}
+
+.file-upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem; 
+  padding: 8px 12px; 
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: var(--bg-light);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.file-upload-label:hover {
+  border-color: var(--primary-color);
+  background-color: var(--accent-light);
+}
+
+.file-name {
+  color: var(--text-light);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.submit-btn {
+  padding: 10px 32px; 
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 1.5rem auto 0; 
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 27, 191, 0.3);
+}
+
+/* Responsiveness*/
+
+@media (max-width: 900px) {
+  .report-section {
+    padding: 1rem 2rem;
+  }
+  
+  .report-form {
+    padding: 1rem;
+  }
+  
+  .category-row {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .report-section {
+    padding: 0.5rem 1rem;
+  }
+  
+  .report-form {
+    padding: 0.8rem;
+  }
+}
+
+
+/* SEARCH PAGE */
+
+ .search-bar {
+  max-width: 1000px;
+  margin: 40px auto;
+  font-family: "Inter", sans-serif;
+  color: #333;
+}
+
+/* Top text and divider */
+.results-text {
+  font-size: 1.1rem;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin-bottom: 25px;
+}
+
+/* Controls layout */
+.search-controls {
+  display: flex;
+  align-items: flex-start;
+   /*gap: 1rem; */
+}
+
+/* Dropdown */
+.categories-filter select {
+  padding: 14px 18px;
+  border: 1px solid #5a3df0;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='black' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 14px;
+  min-width: 220px;
+  font-weight: 600;
+  margin-right: 15rem; 
+}
+
+/* Search box */
+.search-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.search-box input {
+  width: 85%;
+  padding: 14px 20px 14px 45px;
+  border: 1px solid black;
+  border-radius: 30px;
+  font-size: 1rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='gray' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 5L20.49 19l-5-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 15px center;
+  background-size: 18px;
+}
+
+.search-box small {
+  color: #b3b3b3;
+  margin-top: 6px;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* Search button */
+.search-button {
+  padding: 14px 30px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 2px;
+  margin-left: auto;  
+}
+
+.search-button:hover {
+  background-color: var(--primary-hover);
+}
+
