@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search Lost Item - CIU Lost & Found</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <!-- Header -->
   <header>
@@ -25,36 +27,36 @@
 
   <!-- Search Section -->
   <div class="search-bar">
-  <p class="results-text">We found 125 unclaimed items.</p>
-  <hr class="divider">
+    <p class="results-text">We found 125 unclaimed items.</p>
+    <hr class="divider">
 
-  <div class="search-controls">
-    <div class="categories-filter">
-      <select>
-        <option>Show all categories</option>
-        <option>Animals</option>
-        <option>Footwear</option>
-        <option>Bags & Backpacks</option>
-        <option>Books</option>
-        <option>Clothing</option>
-        <option>Electronics</option>
-        <option>Eyewear</option>
-        <option>IDs & Cards</option>
-        <option>Keys</option>
-        <option>Miscellaneous</option>
-        <option>Wallets & Purses</option>
-        <option>Watches & Jewelry</option>
-      </select>
+    <div class="search-controls">
+      <div class="categories-filter">
+        <select>
+          <option value="">Show all categories</option>
+          <option value="animals">Animals</option>
+          <option value="footwear">Footwear</option>
+          <option value="bags">Bags & Backpacks</option>
+          <option value="books">Books</option>
+          <option value="clothing">Clothing</option>
+          <option value="electronics">Electronics</option>
+          <option value="eyewear">Eyewear</option>
+          <option value="ids">IDs & Cards</option>
+          <option value="keys">Keys</option>
+          <option value="misc">Miscellaneous</option>
+          <option value="wallets">Wallets & Purses</option>
+          <option value="jewelry">Watches & Jewelry</option>
+        </select>
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="Search item...">
+        <small>e.g Sweater, Necklace, Phone</small>
+      </div>
+
+      <button class="search-button" type="submit">Search</button>
     </div>
-
-    <div class="search-box">
-      <input type="text" placeholder="Search item...">
-      <small>e.g Sweater, Necklace, Phone</small>
-    </div>
-
-    <button class="search-button" type="submit">Search</button>
   </div>
-</div>
 
   <!-- Footer -->
   <footer>
@@ -64,4 +66,5 @@
   </footer>
   <script src="js/search.js"></script>
 </body>
+
 </html>
