@@ -24,6 +24,13 @@ class ItemController {
         });
       }
 
+      if (!['lost', 'found'].includes(itemStatus)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Item status must be lost or found'
+        });
+      }
+
       const result = await ItemModel.createItem({
         userId,
         title,

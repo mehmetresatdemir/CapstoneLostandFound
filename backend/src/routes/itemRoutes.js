@@ -1,11 +1,11 @@
 const express = require('express');
 const ItemController = require('../controllers/ItemController');
 const { authenticateToken } = require('../middleware/auth');
-const { validateCreateItem } = require('../middleware/validation');
+
 
 const router = express.Router();
 
-router.post('/', authenticateToken, validateCreateItem, ItemController.createItem);
+router.post('/', authenticateToken, ItemController.createItem);
 router.get('/', ItemController.getAllItems);
 router.get('/search', ItemController.searchItems);
 router.get('/user/items', authenticateToken, ItemController.getUserItems);
