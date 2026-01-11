@@ -56,10 +56,10 @@ async function startServer() {
 
     const PORT = config.server.port;
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT} (${config.server.environment})`);
+      console.log(`Server running on port ${PORT} (${config.server.environment})`);
     });
   } catch (error) {
-    console.error('❌ Server startup failed:', error);
+    console.error('Server startup failed:', error);
     process.exit(1);
   }
 }
