@@ -47,7 +47,6 @@ class ItemController {
 
       res.status(201).json({
         success: true,
-        message: 'Item posted successfully',
         data: {
           itemId: result.insertId,
           title,
@@ -77,7 +76,6 @@ class ItemController {
 
       res.json({
         success: true,
-        message: 'Item retrieved successfully',
         data: {
           ...item,
           responses
@@ -107,7 +105,6 @@ class ItemController {
 
       res.json({
         success: true,
-        message: 'Items retrieved successfully',
         data: items,
         count: items.length
       });
@@ -131,7 +128,6 @@ class ItemController {
 
       res.json({
         success: true,
-        message: 'Search results',
         data: items,
         count: items.length
       });
@@ -148,7 +144,6 @@ class ItemController {
 
       res.json({
         success: true,
-        message: 'User items retrieved successfully',
         data: items,
         count: items.length
       });
@@ -172,7 +167,6 @@ class ItemController {
 
       res.json({
         success: true,
-        message: 'Items retrieved by category',
         data: items,
         count: items.length
       });
@@ -207,8 +201,7 @@ class ItemController {
       });
 
       res.json({
-        success: true,
-        message: 'Item marked as resolved'
+        success: true
       });
     } catch (error) {
       next(error);
@@ -238,8 +231,7 @@ class ItemController {
       await ItemModel.deleteItem(id);
 
       res.json({
-        success: true,
-        message: 'Item deleted successfully'
+        success: true
       });
     } catch (error) {
       next(error);
@@ -277,7 +269,6 @@ class ItemController {
 
       res.status(201).json({
         success: true,
-        message: 'Response added successfully',
         data: {
           responseId: result.insertId
         }
@@ -303,7 +294,6 @@ class ItemController {
 
       res.json({
         success: true,
-        message: 'Responses retrieved successfully',
         data: responses,
         count: responses.length
       });

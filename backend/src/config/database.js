@@ -6,7 +6,6 @@ let pool;
 async function initializePool() {
   try {
     pool = mysql.createPool(config.database);
-    console.log('Database pool created successfully');
     return pool;
   } catch (error) {
     console.error('Failed to create database pool:', error);
@@ -27,7 +26,7 @@ async function executeQuery(sql, values = []) {
     const [results] = await connection.execute(sql, values);
     return results;
   } finally {
-    connection.release(); // Use release() for pool connections, not end()
+    connection.release();
   }
 }
 

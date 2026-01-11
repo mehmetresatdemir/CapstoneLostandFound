@@ -49,25 +49,17 @@ app.use((req, res) => {
 // Error handler
 app.use(errorHandler);
 
-// Initialize database and start server
 async function startServer() {
   try {
-    console.log('Initializing database...');
     await initializeDatabase();
-    console.log('Database initialized successfully');
-
-    console.log('Creating database connection pool...');
     await initializePool();
-    console.log('Database pool created successfully');
 
     const PORT = config.server.port;
     app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-      console.log(`Environment: ${config.server.environment}`);
-      console.log(`API Health Check: http://localhost:${PORT}/api/health`);
+      console.log(`🚀 Server running on port ${PORT} (${config.server.environment})`);
     });
   } catch (error) {
-    console.error('Failed to start server:', error);
+    console.error('❌ Server startup failed:', error);
     process.exit(1);
   }
 }

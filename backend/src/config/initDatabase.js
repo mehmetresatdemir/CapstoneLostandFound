@@ -10,11 +10,8 @@ async function initializeDatabase() {
 
   try {
     await connection.query(`CREATE DATABASE IF NOT EXISTS ${config.database.database}`);
-    console.log(`Database ${config.database.database} created or already exists`);
-
     await connection.query(`USE ${config.database.database}`);
 
-    // Create users table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,9 +24,7 @@ async function initializeDatabase() {
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       )
     `);
-    console.log('Users table created or already exists');
 
-    // Create items table
     await connection.query(`
       CREATE TABLE IF NOT EXISTS items (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,9 +50,7 @@ async function initializeDatabase() {
         INDEX idx_category (category)
       )
     `);
-    console.log('Items table created or already exists');
 
-    // Create responses table for comments/messages between users
     await connection.query(`
       CREATE TABLE IF NOT EXISTS item_responses (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -73,9 +66,6 @@ async function initializeDatabase() {
         INDEX idx_responder_id (responder_id)
       )
     `);
-    console.log('Item responses table created or already exists');
-
-    console.log('Database initialization completed successfully');
   } catch (error) {
     console.error('Database initialization error:', error);
     throw error;

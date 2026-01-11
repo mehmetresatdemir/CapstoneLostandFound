@@ -15,9 +15,11 @@ function errorHandler(err, req, res, next) {
     });
   }
 
+  const isDev = process.env.NODE_ENV !== 'production';
   res.status(500).json({
     success: false,
-    message: 'An error occurred on the server'
+    message: isDev ? err.message : 'Server error',
+    ...(isDev && { stack: err.stack })
   });
 }
 

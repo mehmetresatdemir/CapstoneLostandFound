@@ -51,7 +51,6 @@ class AuthController {
 
       res.status(201).json({
         success: true,
-        message: 'User registered successfully',
         data: {
           userId: result.insertId,
           email,
@@ -96,7 +95,6 @@ class AuthController {
 
       res.json({
         success: true,
-        message: 'Login successful',
         data: {
           userId: user.id,
           email: user.email,
@@ -124,7 +122,6 @@ class AuthController {
 
       res.json({
         success: true,
-        message: 'Profile retrieved successfully',
         data: {
           userId: user.id,
           firstName: user.first_name,
@@ -154,7 +151,6 @@ class AuthController {
 
       res.json({
         success: true,
-        message: 'Profile updated successfully',
         data: {
           userId: updatedUser.id,
           firstName: updatedUser.first_name,
