@@ -18,7 +18,7 @@ class UserModel {
   }
 
   static async getUserById(userId) {
-    const sql = 'SELECT id, first_name, last_name, email, phone, created_at, updated_at FROM users WHERE id = ?';
+    const sql = 'SELECT id, first_name, last_name, email, phone, password, created_at, updated_at FROM users WHERE id = ?';
     const results = await executeQuery(sql, [userId]);
     return results[0] || null;
   }
@@ -31,6 +31,11 @@ class UserModel {
       WHERE id = ?
     `;
     await executeQuery(sql, [firstName, lastName, phone, userId]);
+  }
+
+  static async updatePassword(userId, passwordHash) {
+    const sql = 'UPDATE users SET password = ? WHERE id = ?';
+    await executeQuery(sql, [passwordHash, userId]);
   }
 }
 

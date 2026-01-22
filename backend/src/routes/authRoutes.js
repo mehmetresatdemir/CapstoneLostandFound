@@ -8,5 +8,6 @@ router.post('/register', AuthController.register);
 router.post('/login', AuthController.login);
 router.get('/profile', authenticateToken, AuthController.getProfile);
 router.put('/profile', authenticateToken, AuthController.updateProfile);
+router.put('/change-password', authenticateToken, AuthController.changePassword);
 
 module.exports = router;

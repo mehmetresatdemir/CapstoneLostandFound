@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = '/api';
 
 document.addEventListener('DOMContentLoaded', function() {
   const token = localStorage.getItem('token');
@@ -15,23 +15,60 @@ function updateNavigationForLoggedInUser(userName) {
     const loginLink = nav.querySelector('a[href="login.html"]');
     if (loginLink) {
       const loginListItem = loginLink.parentElement;
-      const userInfo = document.createElement('span');
-      userInfo.textContent = `Welcome, ${userName}`;
-      userInfo.style.color = 'white';
-      userInfo.style.marginRight = '1rem';
+      
+      // Create dropdown container
+      const dropdownContainer = document.createElement('div');
+      dropdownContainer.className = 'profile-dropdown-container';
+      
+      // Create profile button
+      const profileButton = document.createElement('a');
+      profileButton.href = '#';
+      profileButton.className = 'profile-button';
+      profileButton.textContent = 'Profile';
+      profileButton.style.cursor = 'pointer';
+      profileButton.style.color = 'white';
+      profileButton.style.marginRight = '1rem';
+      profileButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        const dropdown = dropdownContainer.querySelector('.profile-dropdown');
+        dropdown.classList.toggle('show');
+      });
+      
+      // Create dropdown menu
+      const dropdown = document.createElement('div');
+      dropdown.className = 'profile-dropdown';
+      
+      const profileLink = document.createElement('a');
+      profileLink.href = 'profile.html';
+      profileLink.textContent = 'Profile';
+      profileLink.addEventListener('click', function(e) {
+        dropdown.classList.remove('show');
+      });
       
       const logoutLink = document.createElement('a');
       logoutLink.href = '#';
       logoutLink.textContent = 'Logout';
-      logoutLink.style.cursor = 'pointer';
       logoutLink.addEventListener('click', function(e) {
         e.preventDefault();
+        dropdown.classList.remove('show');
         logout();
       });
       
+      dropdown.appendChild(profileLink);
+      dropdown.appendChild(logoutLink);
+      
+      dropdownContainer.appendChild(profileButton);
+      dropdownContainer.appendChild(dropdown);
+      
       loginListItem.innerHTML = '';
-      loginListItem.appendChild(userInfo);
-      loginListItem.appendChild(logoutLink);
+      loginListItem.appendChild(dropdownContainer);
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!dropdownContainer.contains(e.target)) {
+          dropdown.classList.remove('show');
+        }
+      });
     }
   }
 }

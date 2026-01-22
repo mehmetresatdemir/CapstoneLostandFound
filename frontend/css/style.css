@@ -113,6 +113,66 @@ nav a:hover {
   color: var(--accent-light);
 }
 
+/* Profile Dropdown */
+.profile-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-button {
+  color: var(--bg-white) !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.profile-button:hover {
+  color: var(--accent-light) !important;
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background-color: var(--bg-white);
+  min-width: 150px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-dropdown.show {
+  display: block;
+}
+
+.profile-dropdown a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.profile-dropdown a:hover {
+  background-color: var(--bg-light);
+  color: var(--primary-color);
+}
+
+.profile-dropdown a:last-child {
+  border-top: 1px solid #eee;
+  color: #d32f2f;
+}
+
+.profile-dropdown a:last-child:hover {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
 /* Hero Section */
 .hero {
   display: flex;
@@ -426,6 +486,14 @@ footer a:hover {
   margin-bottom: 1.5rem;
 }
 
+.signup-form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
 .signup-form input,
 .signup-form select {
   width: 100%;
@@ -472,6 +540,26 @@ footer a:hover {
 
 .signup-links {
   text-align: center;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border-left: 4px solid #c62828;
+}
+
+.success-message {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px 15px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  border-left: 4px solid #2e7d32;
 }
 
 .clear-account {
@@ -675,6 +763,28 @@ footer a:hover {
   box-shadow: 0 4px 12px rgba(79, 27, 191, 0.3);
 }
 
+.change-password-btn {
+  padding: 10px 32px;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 1rem auto 0;
+  width: 100%;
+}
+
+.change-password-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 27, 191, 0.3);
+}
+
 /* Responsiveness*/
 
 @media (max-width: 900px) {
@@ -733,7 +843,8 @@ footer a:hover {
 }
 
 /* Dropdown */
-.categories-filter select {
+.categories-filter select,
+.status-filter select {
   padding: 14px 18px;
   border: 1px solid #5a3df0;
   border-radius: 10px;
@@ -747,6 +858,13 @@ footer a:hover {
   background-size: 14px;
   min-width: 220px;
   font-weight: 600;
+}
+
+.categories-filter select {
+  margin-right: 1rem;
+}
+
+.status-filter select {
   margin-right: 15rem;
 }
 
@@ -1161,6 +1279,58 @@ footer a:hover {
   max-width: 600px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   animation: slideDown 0.3s ease;
+}
+
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.modal-content .signup-form {
+  padding: 0;
+  margin-top: 0;
+}
+
+.modal-content .signup-form {
+  padding: 0;
+  margin-top: 0;
+}
+
+.modal-content .signup-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.password-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.password-form-actions .submit-btn {
+  flex: 1;
+  margin: 0;
+}
+
+.cancel-password-btn {
+  flex: 1;
+  margin: 0;
+  padding: 10px 32px;
+  background-color: transparent;
+  color: var(--text-medium);
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-password-btn:hover {
+  background-color: #f5f5f5;
+  border-color: var(--text-medium);
+  transform: translateY(-2px);
 }
 
 @keyframes slideDown {

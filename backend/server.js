@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const { initializeDatabase } = require('./src/config/initDatabase');
+const path = require('path');
 const { initializePool } = require('./src/config/database');
 const config = require('./src/config/config');
 const authRoutes = require('./src/routes/authRoutes');
@@ -18,6 +18,8 @@ app.use((req, res, next) => {
   if (req.method === 'OPTIONS') return res.sendStatus(200);
   next();
 });
+
+// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 
@@ -25,19 +27,28 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Server running' });
 });
 
-app.use((req, res) => {
+// Serve static files from frontend directory
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+// API 404 handler
+app.use('/api/*', (req, res) => {
   res.status(404).json({ success: false, message: 'Endpoint not found' });
 });
+
+// Frontend routes - serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
 app.use(errorHandler);
 
 async function startServer() {
   try {
-    await initializeDatabase();
     await initializePool();
 
     const PORT = config.server.port;
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT} (${config.server.environment})`);
+      console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
     console.error('Server startup failed:', error);

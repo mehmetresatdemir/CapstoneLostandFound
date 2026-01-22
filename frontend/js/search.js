@@ -1,5 +1,5 @@
 // API Base URL
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = '/api';
 
 // Global state
 let currentTab = 'all-items';
@@ -24,10 +24,60 @@ function updateNavigationForLoggedInUser() {
     const loginLink = nav.querySelector('a[href="login.html"]');
     if (loginLink) {
       const loginListItem = loginLink.parentElement;
-      loginListItem.innerHTML = `
-        <span style="color: white; margin-right: 1rem;">Welcome, ${userName}</span>
-        <a href="#" onclick="logout(); return false;" style="cursor: pointer;">Logout</a>
-      `;
+      
+      // Create dropdown container
+      const dropdownContainer = document.createElement('div');
+      dropdownContainer.className = 'profile-dropdown-container';
+      
+      // Create profile button
+      const profileButton = document.createElement('a');
+      profileButton.href = '#';
+      profileButton.className = 'profile-button';
+      profileButton.textContent = 'Profile';
+      profileButton.style.cursor = 'pointer';
+      profileButton.style.color = 'white';
+      profileButton.style.marginRight = '1rem';
+      profileButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        const dropdown = dropdownContainer.querySelector('.profile-dropdown');
+        dropdown.classList.toggle('show');
+      });
+      
+      // Create dropdown menu
+      const dropdown = document.createElement('div');
+      dropdown.className = 'profile-dropdown';
+      
+      const profileLink = document.createElement('a');
+      profileLink.href = 'profile.html';
+      profileLink.textContent = 'Profile';
+      profileLink.addEventListener('click', function(e) {
+        dropdown.classList.remove('show');
+      });
+      
+      const logoutLink = document.createElement('a');
+      logoutLink.href = '#';
+      logoutLink.textContent = 'Logout';
+      logoutLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        dropdown.classList.remove('show');
+        logout();
+      });
+      
+      dropdown.appendChild(profileLink);
+      dropdown.appendChild(logoutLink);
+      
+      dropdownContainer.appendChild(profileButton);
+      dropdownContainer.appendChild(dropdown);
+      
+      loginListItem.innerHTML = '';
+      loginListItem.appendChild(dropdownContainer);
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!dropdownContainer.contains(e.target)) {
+          dropdown.classList.remove('show');
+        }
+      });
     }
   }
 }
@@ -41,6 +91,7 @@ function initializeSearch() {
   const searchButton = document.querySelector('.search-button');
   const searchInput = document.querySelector('.search-box input');
   const categorySelect = document.querySelector('.categories-filter select');
+  const statusSelect = document.getElementById('statusFilter');
   const resultsText = document.querySelector('.results-text');
 
   if (!searchButton || !searchInput) return;
@@ -62,13 +113,26 @@ function initializeSearch() {
       if (currentTab === 'all-items') performSearch();
     });
   }
+
+  if (statusSelect) {
+    statusSelect.addEventListener('change', function () {
+      if (currentTab === 'all-items') performSearch();
+    });
+  }
 }
 
 async function loadAllItems() {
   const resultsText = document.querySelector('.results-text');
+  const statusSelect = document.getElementById('statusFilter');
+  const status = statusSelect ? statusSelect.value : '';
 
   try {
-    const response = await fetch(`${API_BASE_URL}/items`, {
+    const params = new URLSearchParams();
+    if (status && status !== '') params.append('status', status);
+
+    const url = params.toString() ? `${API_BASE_URL}/items?${params.toString()}` : `${API_BASE_URL}/items`;
+    
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -101,15 +165,18 @@ async function loadAllItems() {
 async function performSearch() {
   const searchInput = document.querySelector('.search-box input');
   const categorySelect = document.querySelector('.categories-filter select');
+  const statusSelect = document.getElementById('statusFilter');
   const resultsText = document.querySelector('.results-text');
 
   const searchTerm = searchInput.value.trim();
   const category = categorySelect.value;
+  const status = statusSelect ? statusSelect.value : '';
 
   try {
     const params = new URLSearchParams();
     if (searchTerm) params.append('search', searchTerm);
     if (category && category !== '') params.append('category', category);
+    if (status && status !== '') params.append('status', status);
 
     const response = await fetch(`${API_BASE_URL}/items?${params.toString()}`, {
       method: 'GET',
