@@ -72,14 +72,9 @@ class ItemController {
         });
       }
 
-      const responses = await ItemModel.getItemResponses(id);
-
       res.json({
         success: true,
-        data: {
-          ...item,
-          responses
-        }
+        data: item
       });
     } catch (error) {
       next(error);
@@ -288,69 +283,6 @@ class ItemController {
     }
   }
 
-  static async addResponse(req, res, next) {
-    try {
-      const itemId = req.params.id;
-      const responderId = req.userId;
-      const { message, contactPhone, contactEmail } = req.body;
-
-      if (!message) {
-        return res.status(400).json({
-          success: false,
-          message: 'Message is required'
-        });
-      }
-
-      const item = await ItemModel.getItemById(itemId);
-      if (!item) {
-        return res.status(404).json({
-          success: false,
-          message: 'Item not found'
-        });
-      }
-
-      const result = await ItemModel.addItemResponse(
-        itemId,
-        responderId,
-        message,
-        contactPhone || null,
-        contactEmail || null
-      );
-
-      res.status(201).json({
-        success: true,
-        data: {
-          responseId: result.insertId
-        }
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  static async getResponses(req, res, next) {
-    try {
-      const { id } = req.params;
-
-      const item = await ItemModel.getItemById(id);
-      if (!item) {
-        return res.status(404).json({
-          success: false,
-          message: 'Item not found'
-        });
-      }
-
-      const responses = await ItemModel.getItemResponses(id);
-
-      res.json({
-        success: true,
-        data: responses,
-        count: responses.length
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
 }
 
 module.exports = ItemController;

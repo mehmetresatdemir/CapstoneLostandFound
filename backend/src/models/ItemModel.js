@@ -176,26 +176,6 @@ class ItemModel {
     return results;
   }
 
-  static async addItemResponse(itemId, responderId, message, contactPhone, contactEmail) {
-    const sql = `
-      INSERT INTO item_responses (item_id, responder_id, message, contact_phone, contact_email)
-      VALUES (?, ?, ?, ?, ?)
-    `;
-    const result = await executeQuery(sql, [itemId, responderId, message, contactPhone, contactEmail]);
-    return result;
-  }
-
-  static async getItemResponses(itemId) {
-    const sql = `
-      SELECT ir.*, u.first_name, u.last_name, u.email
-      FROM item_responses ir
-      JOIN users u ON ir.responder_id = u.id
-      WHERE ir.item_id = ?
-      ORDER BY ir.response_date DESC
-    `;
-    const results = await executeQuery(sql, [itemId]);
-    return results;
-  }
 }
 
 module.exports = ItemModel;

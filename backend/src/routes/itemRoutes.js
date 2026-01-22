@@ -14,7 +14,5 @@ router.put('/:id', authenticateToken, ItemController.updateItem);
 router.put('/:id/resolve', authenticateToken, ItemController.resolveItem);
 router.delete('/:id', authenticateToken, ItemController.deleteItem);
 
-router.post('/:id/responses', authenticateToken, ItemController.addResponse);
-router.get('/:id/responses', ItemController.getResponses);
 
 module.exports = router;
