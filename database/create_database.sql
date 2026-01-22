@@ -42,20 +42,7 @@ CREATE TABLE IF NOT EXISTS items (
   INDEX idx_category (category)
 );
 
--- Item responses table
-CREATE TABLE IF NOT EXISTS item_responses (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  item_id INT NOT NULL,
-  responder_id INT NOT NULL,
-  message TEXT NOT NULL,
-  contact_phone VARCHAR(20),
-  contact_email VARCHAR(255),
-  response_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE,
-  FOREIGN KEY (responder_id) REFERENCES users(id) ON DELETE CASCADE,
-  INDEX idx_item_id (item_id),
-  INDEX idx_responder_id (responder_id)
-);
+
 
 -- Verify tables
 SHOW TABLES;
