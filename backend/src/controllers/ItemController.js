@@ -175,6 +175,56 @@ class ItemController {
     }
   }
 
+  static async updateItem(req, res, next) {
+    try {
+      const { id } = req.params;
+      const userId = req.userId;
+      const {
+        title,
+        description,
+        category,
+        itemStatus,
+        locationFound,
+        locationLost,
+        imageUrl,
+        isResolved
+      } = req.body;
+
+      const item = await ItemModel.getItemById(id);
+      if (!item) {
+        return res.status(404).json({
+          success: false,
+          message: 'Item not found'
+        });
+      }
+
+      if (item.user_id !== userId) {
+        return res.status(403).json({
+          success: false,
+          message: 'Not authorized to update this item'
+        });
+      }
+
+      await ItemModel.updateItem(id, {
+        title,
+        description,
+        category,
+        itemStatus,
+        locationFound,
+        locationLost,
+        imageUrl,
+        isResolved
+      });
+
+      res.json({
+        success: true,
+        message: 'Item updated successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async resolveItem(req, res, next) {
     try {
       const { id } = req.params;

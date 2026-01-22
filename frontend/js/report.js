@@ -1,28 +1,18 @@
-// API Base URL
 const API_BASE_URL = 'http://localhost:3000/api';
 
-// Check authentication on page load
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('Report page loaded');
-
-  // Check if user is logged in
   const token = localStorage.getItem('token');
 
   if (!token) {
-    // Redirect to login if not authenticated
-    alert('Please login to report a found item.');
+    alert('Please login to report an item.');
     window.location.href = 'login.html';
     return;
   }
 
-  // Update navigation for logged in user
   updateNavigationForLoggedInUser();
-
-  // Initialize form
   initializeReportForm();
 });
 
-// Update navigation for logged in users
 function updateNavigationForLoggedInUser() {
   const userName = localStorage.getItem('userName');
   const nav = document.querySelector('nav ul');
@@ -38,16 +28,36 @@ function updateNavigationForLoggedInUser() {
   }
 }
 
-// Logout function
 function logout() {
   localStorage.clear();
   window.location.href = 'login.html';
 }
 
-// Initialize report form
 function initializeReportForm() {
   const reportForm = document.querySelector('.report-form');
   if (!reportForm) return;
+  
+  const reportTypeInputs = document.querySelectorAll('input[name="report-type"]');
+  const locationLabel = document.getElementById('location-label');
+  const locationInput = document.getElementById('location');
+  
+  reportTypeInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      if (this.value === 'found') {
+        locationLabel.textContent = 'Location Where Found *';
+        locationInput.placeholder = 'Where did you find it?';
+      } else {
+        locationLabel.textContent = 'Location Where Lost *';
+        locationInput.placeholder = 'Where did you lose it?';
+      }
+    });
+  });
+  
+  const selectedType = document.querySelector('input[name="report-type"]:checked')?.value;
+  if (selectedType === 'found') {
+    locationLabel.textContent = 'Location Where Found *';
+    locationInput.placeholder = 'Where did you find it?';
+  }
 
   reportForm.addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -62,30 +72,41 @@ function initializeReportForm() {
     // Get form values
     const title = document.getElementById('item-description').value.trim();
     const category = document.querySelector('input[name="category"]:checked')?.value;
-    const locationFound = document.getElementById('location').value.trim();
+    const reportType = document.querySelector('input[name="report-type"]:checked')?.value;
+    const location = document.getElementById('location').value.trim();
     const description = document.getElementById('details').value.trim();
     const photoFile = document.getElementById('photo').files[0];
 
     // Validation
-    if (!title || !category || !locationFound) {
+    if (!title || !category || !location || !reportType) {
       alert('Please fill in all required fields.');
       return;
     }
 
     try {
-      // Prepare request body
       const requestBody = {
-        title: title,
-        description: description || title, // Use title as description if not provided
-        category: category,
-        itemStatus: 'found',
-        locationFound: locationFound
+        title,
+        description: description || title,
+        category,
+        itemStatus: reportType
       };
+      
+      if (reportType === 'found') {
+        requestBody.locationFound = location;
+      } else {
+        requestBody.locationLost = location;
+      }
 
-      // TODO: Handle image upload separately if needed
-      // For now, we'll skip image upload until we implement file upload endpoint
+      if (photoFile) {
+        try {
+          const base64Image = await convertImageToBase64(photoFile);
+          requestBody.imageUrl = base64Image;
+        } catch (error) {
+          console.error('Error converting image:', error);
+          alert('Error processing image. Submitting without image.');
+        }
+      }
 
-      // Send request
       const response = await fetch(`${API_BASE_URL}/items`, {
         method: 'POST',
         headers: {
@@ -100,10 +121,7 @@ function initializeReportForm() {
       if (response.ok && data.success) {
         alert('Item reported successfully!');
         reportForm.reset();
-        // Redirect to home page after successful submission
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 1500);
+        setTimeout(() => window.location.href = 'index.html', 1500);
       } else {
         alert(data.message || 'Failed to report item. Please try again.');
       }
@@ -113,18 +131,48 @@ function initializeReportForm() {
     }
   });
 
-  // File upload display
   const photoInput = document.getElementById('photo');
   const fileNameSpan = document.querySelector('.file-name');
   if (photoInput && fileNameSpan) {
     photoInput.addEventListener('change', function (e) {
       const file = e.target.files[0];
       if (file) {
+        const maxSize = 5 * 1024 * 1024;
+        if (file.size > maxSize) {
+          alert('Image file is too large. Please choose an image smaller than 5MB.');
+          photoInput.value = '';
+          fileNameSpan.textContent = 'No file chosen';
+          return;
+        }
+        
+        if (!file.type.startsWith('image/')) {
+          alert('Please select an image file.');
+          photoInput.value = '';
+          fileNameSpan.textContent = 'No file chosen';
+          return;
+        }
+        
         fileNameSpan.textContent = file.name;
       } else {
         fileNameSpan.textContent = 'No file chosen';
       }
     });
   }
+}
+
+function convertImageToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      resolve(e.target.result);
+    };
+    
+    reader.onerror = function(error) {
+      reject(error);
+    };
+    
+    reader.readAsDataURL(file);
+  });
 }
 

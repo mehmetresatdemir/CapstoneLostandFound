@@ -87,7 +87,7 @@ class ItemModel {
     const sql = `
       SELECT * FROM items
       WHERE user_id = ?
-      ORDER BY created_at DESC
+      ORDER BY is_resolved ASC, created_at DESC
     `;
     const results = await executeQuery(sql, [userId]);
     return results;
@@ -106,6 +106,46 @@ class ItemModel {
     const searchPattern = `%${searchTerm}%`;
     const results = await executeQuery(sql, [searchPattern, searchPattern, searchPattern, searchPattern]);
     return results;
+  }
+
+  static async updateItem(itemId, updates) {
+    const {
+      title,
+      description,
+      category,
+      itemStatus,
+      locationFound,
+      locationLost,
+      imageUrl,
+      isResolved
+    } = updates;
+
+    const sql = `
+      UPDATE items
+      SET 
+        title = COALESCE(?, title),
+        description = COALESCE(?, description),
+        category = COALESCE(?, category),
+        item_status = COALESCE(?, item_status),
+        location_found = COALESCE(?, location_found),
+        location_lost = COALESCE(?, location_lost),
+        image_url = COALESCE(?, image_url),
+        is_resolved = COALESCE(?, is_resolved),
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = ?
+    `;
+    
+    await executeQuery(sql, [
+      title || null,
+      description || null,
+      category || null,
+      itemStatus || null,
+      locationFound || null,
+      locationLost || null,
+      imageUrl || null,
+      isResolved !== undefined ? isResolved : null,
+      itemId
+    ]);
   }
 
   static async updateItemStatus(itemId, updates) {

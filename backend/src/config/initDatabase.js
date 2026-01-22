@@ -38,7 +38,7 @@ async function initializeDatabase() {
         date_lost DATETIME,
         date_found DATETIME,
         reward_amount DECIMAL(10, 2),
-        image_url VARCHAR(500),
+        image_url LONGTEXT,
         is_resolved BOOLEAN DEFAULT FALSE,
         resolved_date DATETIME,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

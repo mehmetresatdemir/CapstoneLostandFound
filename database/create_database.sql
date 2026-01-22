@@ -1,10 +1,11 @@
--- Veritabanı oluştur
-CREATE DATABASE IF NOT EXISTS lost_and_found;
+-- CIU Lost & Found Database Schema
+-- Base64 image storage with LONGTEXT
+-- Claim tracking with is_resolved flag
 
--- Veritabanını kullan
+CREATE DATABASE IF NOT EXISTS lost_and_found;
 USE lost_and_found;
 
--- Users tablosu
+-- Users table
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(100) NOT NULL,
@@ -16,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Items tablosu
+-- Items table
 CREATE TABLE IF NOT EXISTS items (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
@@ -29,8 +30,8 @@ CREATE TABLE IF NOT EXISTS items (
   date_lost DATETIME,
   date_found DATETIME,
   reward_amount DECIMAL(10, 2),
-  image_url VARCHAR(500),
-  is_resolved BOOLEAN DEFAULT FALSE,
+  image_url LONGTEXT,  -- LONGTEXT for base64 images
+  is_resolved BOOLEAN DEFAULT FALSE,  -- TRUE when claimed
   resolved_date DATETIME,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS items (
   INDEX idx_category (category)
 );
 
--- Item responses tablosu
+-- Item responses table
 CREATE TABLE IF NOT EXISTS item_responses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   item_id INT NOT NULL,
@@ -56,7 +57,6 @@ CREATE TABLE IF NOT EXISTS item_responses (
   INDEX idx_responder_id (responder_id)
 );
 
--- Veritabanı ve tabloları göster
-SHOW DATABASES LIKE 'lost_and_found';
+-- Verify tables
 SHOW TABLES;
-
+DESCRIBE items;
